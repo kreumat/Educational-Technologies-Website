@@ -3,43 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice Time: Match the Word!</title>
+    <title>Practice Quiz</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
     <header>
-        <h1>Practice Time: Match the Word!</h1>
+        <a href="../../index.html" class="nav-button back-button">Back to Home</a>
+        <h1>Practice & Quiz</h1>
     </header>
 
-    <nav>
-        <a href="../../index.html">Home</a>
-        <a href="../objects/objects.html">Objects</a>
-        <a href="../instructions/instructions.html">Instructions</a>
-        <a href="../colours/colours.html">Colours</a>
-        <a href="quiz.html">Quiz</a>
-    </nav>
-
     <main>
-        <p>Click an image on the left, then click the matching word on the right.</p>
-        <div class="quiz-container">
-            <div class="quiz-col" id="quiz-images">
-                <div class="quiz-item" data-match-id="1">
-                    <img src="../images/placeholder.png" alt="Quiz image 1">
+        <!-- Activity A: Classification Mock-up -->
+        <section class="quiz-section">
+            <h2>Activity A: Classification</h2>
+            <p>Click an item, then click a box to categorize it!</p>
+            <div class="classification-activity">
+                <div class="items-to-classify">
+                    <div class="item" data-id="1">A desk</div>
+                    <div class="item" data-id="2">A pencil</div>
+                    <div class="item" data-id="3">Listen!</div>
+                    <div class="item" data-id="4">A chair</div>
+                    <div class="item" data-id="5">A book</div>
+                    <div class="item" data-id="6">Stand up!</div>
                 </div>
-                <div class="quiz-item" data-match-id="2">
-                    <img src="../images/placeholder.png" alt="Quiz image 2">
-                </div>
-                <div class="quiz-item" data-match-id="3">
-                    <img src="../images/placeholder.png" alt="Quiz image 3">
+                <div class="boxes">
+                    <div class="box" data-category="FURNITURE">
+                        <h3>FURNITURE</h3>
+                    </div>
+                    <div class="box" data-category="OBJECTS">
+                        <h3>OBJECTS</h3>
+                    </div>
+                    <div class="box" data-category="INSTRUCTIONS">
+                        <h3>INSTRUCTIONS</h3>
+                    </div>
                 </div>
             </div>
-            <div class="quiz-col" id="quiz-words">
-                <div class="quiz-item" data-match-id="3">Word C</div>
-                <div class="quiz-item" data-match-id="1">Word A</div>
-                <div class="quiz-item" data-match-id="2">Word B</div>
+        </section>
+
+        <!-- Activity B: Vocabulary Matching -->
+        <section class="quiz-section">
+            <h2>Activity B: Vocabulary Matching</h2>
+            <p>Click an image, then click the matching word.</p>
+            <div class="matching-activity">
+                <div class="matching-images">
+                    <img src="../images/placeholder.png" alt="Image 1" data-match="table">
+                    <img src="../images/placeholder.png" alt="Image 2" data-match="pencil">
+                    <img src="../images/placeholder.png" alt="Image 3" data-match="chair">
+                </div>
+                <div class="matching-words">
+                    <div class="word" data-match="pencil">pencil</div>
+                    <div class="word" data-match="chair">chair</div>
+                    <div class="word" data-match="table">table</div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <script src="../script.js"></script>

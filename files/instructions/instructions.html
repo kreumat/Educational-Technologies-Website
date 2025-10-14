@@ -3,63 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classroom Instructions & Language</title>
+    <title>Classroom Instructions</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
     <header>
-        <h1>Classroom Instructions & Language</h1>
+        <a href="../../index.html" class="nav-button back-button">Back to Home</a>
+        <h1>Instructions & Language</h1>
     </header>
 
-    <nav>
-        <a href="../../index.html">Home</a>
-        <a href="../objects/objects.html">Objects</a>
-        <a href="instructions.html">Instructions</a>
-        <a href="../colours/colours.html">Colours</a>
-        <a href="../quiz/quiz.html">Quiz</a>
-    </nav>
-
     <main>
-        <h2>Classroom Instructions</h2>
-        <div class="container">
-            <div class="item">
-                <img src="../images/placeholder.png" alt="Come here, please!">
-                <p>Come here, please!</p>
+        <section class="instruction-section">
+            <h2>Classroom Instructions</h2>
+            <div class="instruction-list">
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Stand up, please!</button>
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Sit down, please!</button>
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Look at the board, please!</button>
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Open your book!</button>
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Listen!</button>
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Repeat, please!</button>
             </div>
-            <div class="item">
-                <img src="../images/placeholder.png" alt="Look at me!">
-                <p>Look at me!</p>
-            </div>
-            <div class="item">
-                <img src="../images/placeholder.png" alt="Open your book!">
-                <p>Open your book!</p>
-            </div>
-            <div class="item">
-                <img src="../images/placeholder.png" alt="Stand up">
-                <p>Stand up</p>
-            </div>
-            <div class="item">
-                <img src="../images/placeholder.png" alt="Sit down">
-                <p>Sit down</p>
-            </div>
-            <div class="item">
-                <img src="../images/placeholder.png" alt="Listen!">
-                <p>Listen!</p>
-            </div>
-            <div class="item">
-                <img src="../images/placeholder.png" alt="Repeat, please!">
-                <p>Repeat, please!</p>
-            </div>
-        </div>
+        </section>
 
-        <h2>Social Language</h2>
-        <ul>
-            <li>Good job!</li>
-            <li>Are you ready?</li>
-            <li>Yes, you can!</li>
-            <li>Thanks!</li>
-        </ul>
+        <section class="instruction-section">
+            <h2>Social Language</h2>
+            <div class="instruction-list">
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Good job!</button>
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Are you ready?</button>
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Yes, you can!</button>
+                <button class="instruction-item" onclick="playAudio('../audios/apple.mp3')">Thanks!</button>
+            </div>
+        </section>
+
+        <section class="reflection-section">
+            <h2>How do you feel?</h2>
+            <div class="emoji-list">
+                <span class="emoji">😃</span>
+                <span class="emoji">😐</span>
+                <span class="emoji">😞</span>
+            </div>
+        </section>
     </main>
 
     <script src="../script.js"></script>
