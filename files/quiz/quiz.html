@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Quiz</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <header>
+        <a href="../../index.html" class="nav-button back-button">Back to Home</a>
+        <h1>Practice & Quiz</h1>
+    </header>
+
+    <main>
+        <!-- Activity A: Classification Mock-up -->
+        <section class="quiz-section">
+            <h2>Activity A: Classification</h2>
+            <p>Click an item, then click a box to categorize it!</p>
+            <div class="classification-activity">
+                <div class="items-to-classify">
+                    <div class="item" data-id="1">A desk</div>
+                    <div class="item" data-id="2">A pencil</div>
+                    <div class="item" data-id="3">Listen!</div>
+                    <div class="item" data-id="4">A chair</div>
+                    <div class="item" data-id="5">A book</div>
+                    <div class="item" data-id="6">Stand up!</div>
+                </div>
+                <div class="boxes">
+                    <div class="box" data-category="FURNITURE">
+                        <h3>FURNITURE</h3>
+                    </div>
+                    <div class="box" data-category="OBJECTS">
+                        <h3>OBJECTS</h3>
+                    </div>
+                    <div class="box" data-category="INSTRUCTIONS">
+                        <h3>INSTRUCTIONS</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity B: Vocabulary Matching -->
+        <section class="quiz-section">
+            <h2>Activity B: Vocabulary Matching</h2>
+            <p>Click an image, then click the matching word.</p>
+            <div class="matching-activity">
+                <div class="matching-images">
+                    <img src="../images/placeholder.png" alt="Image 1" data-match="table">
+                    <img src="../images/placeholder.png" alt="Image 2" data-match="pencil">
+                    <img src="../images/placeholder.png" alt="Image 3" data-match="chair">
+                </div>
+                <div class="matching-words">
+                    <div class="word" data-match="pencil">pencil</div>
+                    <div class="word" data-match="chair">chair</div>
+                    <div class="word" data-match="table">table</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../script.js"></script>
+</body>
+</html>
