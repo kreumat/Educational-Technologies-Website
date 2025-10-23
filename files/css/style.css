@@ -190,6 +190,39 @@ footer {
     color: #666;
 }
 
+/* --- Homepage Specific: Info Section --- */
+.info-section {
+    text-align: center;
+    padding: 2rem 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.info-description {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.info-signature {
+    font-weight: 700;
+    color: var(--primary-color);
+    animation: breathe 2.5s infinite ease-in-out;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
 
 /* --- Modal Styles --- */
 .modal-overlay {
