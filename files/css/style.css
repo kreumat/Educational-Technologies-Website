@@ -1,6 +1,7 @@
 /* --- Google Font Import --- */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
+
 /* --- CSS Variables (Color Palette) --- */
 :root {
     --primary-color: #0077cc; /* Cheerful Blue */
@@ -247,7 +248,7 @@ footer {
 [data-key] {
     position: relative;
     cursor: help;
-    border-bottom: 2px dotted var(--accent-color);
+    border-bottom: 2px var(--accent-color);
 }
 
 [data-key]::after {
@@ -266,12 +267,14 @@ footer {
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
-    z-index: 100;
+    z-index: 1001;
 }
 
 [data-key]:hover::after {
     visibility: visible;
     opacity: 1;
+	position: absolute;
+	z-index: 1001;
 }
 
 /* --- Learning Outcomes Page --- */

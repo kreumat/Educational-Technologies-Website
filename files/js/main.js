@@ -19,6 +19,8 @@ const learningOutcomesContent = {
 
 const translations = {
     // Adult Titles
+	ceviri_tavsiyesi: "Hover over the text on this page to see its translation (or description).",
+	learning_outcomes: "2. Tema: Classroom Life Outcomes - Bu Temada Çocuklar Neler Öğrenecek?",
     listening_title_a: "Dinleme/İzleme-Anlama",
     reading_title_a: "Okuma-Anlama",
     speaking_title_a: "Konuşma-İfade",
