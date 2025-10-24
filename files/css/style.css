@@ -143,6 +143,14 @@ header {
 
 /* --- Homepage Specific: Card Grid Layout --- */
 .welcome-section {
+
+    text-align: center;
+    padding: 2rem 0 3rem 0;
+}
+
+.index-description {
+	padding-top: 4px;
+	padding-bottom: 4px;
     text-align: center;
     padding: 2rem 0 3rem 0;
 }
