@@ -4,7 +4,7 @@
 
 /* --- CSS Variables (Color Palette) --- */
 :root {
-    --primary-color: #0077cc; /* Cheerful Blue */
+    --primary-color: #0056b3; /* Darker Blue */
     --secondary-color: #f9d71c; /* Sunny Yellow */
     --accent-color: #ff6b6b; /* Playful Red */
     --text-color: #333;
@@ -29,6 +29,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 main {
@@ -188,6 +189,24 @@ footer {
 .card p {
     font-size: 0.9rem;
     color: #666;
+}
+
+.footer-signature {
+    color: var(--white);
+    font-weight: 700;
+    animation: breathe 2s infinite ease-in-out;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
 }
 
 
