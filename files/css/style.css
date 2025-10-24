@@ -30,6 +30,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     overflow-x: hidden;
+    position: relative;
 }
 
 main {
@@ -184,7 +185,9 @@ header {
 
 /* --- Signature Div on Homepage --- */
 .breathing-signature {
-    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     padding: 1rem 2rem;
     color: var(--primary-color);
     font-size: 0.9rem;
