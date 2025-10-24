@@ -183,18 +183,23 @@ header {
     color: #666;
 }
 
-/* --- Signature Div on Homepage --- */
-.breathing-signature {
+/* --- Signature Container --- */
+.signature-container {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 1rem 2rem;
+    bottom: 1rem;
+    right: 2rem;
+    text-align: right;
+}
+
+.breathing-text {
+    display: inline-block;
     color: var(--primary-color);
     font-size: 0.9rem;
     font-weight: 700;
     animation: breathe 2s infinite ease-in-out;
     transform-origin: right;
 }
+
 
 /* --- Keyframe Animations --- */
 @keyframes breathe {
