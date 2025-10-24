@@ -140,15 +140,6 @@ header {
 }
 
 
-/* --- Footer --- */
-footer {
-    text-align: center;
-    padding: 1.5rem 1rem;
-    background-color: var(--primary-color);
-    color: var(--white);
-    margin-top: auto;
-}
-
 /* --- Homepage Specific: Card Grid Layout --- */
 .welcome-section {
     text-align: center;
@@ -191,8 +182,12 @@ footer {
     color: #666;
 }
 
-.footer-signature {
-    color: var(--white);
+/* --- Signature Div on Homepage --- */
+.breathing-signature {
+    text-align: right;
+    padding: 1rem 2rem;
+    color: var(--primary-color);
+    font-size: 0.9rem;
     font-weight: 700;
     animation: breathe 2s infinite ease-in-out;
 }
