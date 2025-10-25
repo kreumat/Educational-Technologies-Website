@@ -53,6 +53,9 @@
             const messageContainer = document.getElementById('message-container');
             const activityContainer = document.querySelector('.activity-container');
             const micStatus = document.getElementById('mic-status');
+            const backLink = document.querySelector('.back-link');
+            const feedbackContainer = document.querySelector('.feedback-container');
+            const cardsWrapper = document.querySelector('.cards-wrapper');
 
             const audio = new Audio('../../audio/apple.mp3');
 
@@ -63,6 +66,10 @@
                 recognition.lang = 'en-US';
                 recognition.continuous = false;
                 recognition.interimResults = true;
+
+                recognition.onstart = () => {
+                    updateMicStatus('listening');
+                };
 
                 recognition.onresult = (event) => {
                     const transcript = Array.from(event.results)
@@ -116,21 +123,18 @@
                     feedbackText.textContent = '-';
                     messageContainer.innerHTML = '';
                     micBtn.disabled = false;
-                    updateMicStatus(false);
+                    updateMicStatus('idle');
                 } else {
                     showCompletionMessage();
                 }
             }
 
             function showCompletionMessage() {
-                const backLink = document.querySelector('.back-link');
-                const feedbackContainer = document.querySelector('.feedback-container');
-
-                activityContainer.style.display = 'none';
-                if(feedbackContainer) feedbackContainer.style.display = 'none';
+                if (cardsWrapper) cardsWrapper.style.display = 'none';
+                if (feedbackContainer) feedbackContainer.style.display = 'none';
                 micStatus.style.display = 'none';
                 messageContainer.innerHTML = `<span class="final-completion">You completed the activity!</span>`;
-                if(backLink) backLink.classList.add('glow');
+                if (backLink) backLink.classList.add('glow');
             }
 
             function displayMessage(text, type) {
@@ -139,11 +143,15 @@
                 messageContainer.innerHTML = `<p class="${className}">${text}</p>`;
             }
 
-            function updateMicStatus(isListening) {
-                if (isListening) {
+            function updateMicStatus(status) {
+                if (status === 'listening') {
                     micStatus.textContent = 'Listening...';
                     micStatus.className = 'mic-status-listening';
-                } else {
+                } else if (status === 'waiting') {
+                    micStatus.textContent = 'Waiting for microphone permission...';
+                    micStatus.className = 'mic-status-waiting';
+                }
+                else {
                     micStatus.textContent = 'Click the microphone to start speaking';
                     micStatus.className = 'mic-status-idle';
                 }
@@ -155,14 +163,14 @@
                 micBtn.classList.add('listening');
                 micBtn.disabled = true;
                 feedbackText.textContent = '...';
-                updateMicStatus(true);
+                updateMicStatus('waiting');
                 recognition.start();
 
                 clearTimeout(timeoutId);
                 timeoutId = setTimeout(() => {
                     recognition.stop();
                     displayMessage('Try Again!', 'error');
-                    updateMicStatus(false);
+                    updateMicStatus('idle');
                     micBtn.disabled = false;
                 }, 20000); // 20-second timer
             }
@@ -171,7 +179,7 @@
                 if (!recognition) return;
                 micBtn.classList.remove('listening');
                 clearTimeout(timeoutId);
-                updateMicStatus(false);
+                updateMicStatus('idle');
             }
 
             function checkAnswer(transcript) {
@@ -182,7 +190,7 @@
                     clearTimeout(timeoutId);
                     recognition.stop();
                     displayMessage("That's Right!", 'correct');
-                    updateMicStatus(false);
+                    updateMicStatus('idle');
 
                     let countdown = 3;
                     const countdownInterval = setInterval(() => {

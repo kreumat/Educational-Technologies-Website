@@ -674,6 +674,7 @@ header {
     font-weight: bold;
     font-size: 1.2rem;
     min-height: 1.5rem;
+    text-align: center;
 }
 
 .listen-repeat-body .mic-status-listening {
@@ -682,6 +683,10 @@ header {
 
 .listen-repeat-body .mic-status-idle {
     color: #6c757d;
+}
+
+.listen-repeat-body .mic-status-waiting {
+    color: #17a2b8;
 }
 
 .listen-repeat-body .message-correct {
