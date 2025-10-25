@@ -666,6 +666,7 @@ header {
     font-size: 1.5rem;
     font-weight: bold;
     min-height: 50px;
+    text-align: center;
 }
 
 .listen-repeat-body .message-correct {
