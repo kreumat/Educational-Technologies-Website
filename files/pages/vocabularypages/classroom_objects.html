@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom Objects Activity</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../../css/style.css">
     <style>
         /* Activity Page Styles */
         body {
@@ -108,7 +108,7 @@
             flex: 3;
             min-width: 400px;
             height: 600px;
-            background-image: url('../../files/images/vocabulary/backgrounds/classroom.png');
+            background-image: url('../../../files/images/vocabulary/backgrounds/classroom.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -148,7 +148,7 @@
     </style>
 </head>
 <body>
-    <audio id="correctSound" src="../../files/audio/apple.mp3" preload="auto"></audio>
+    <audio id="correctSound" src="../../../files/audio/apple.mp3" preload="auto"></audio>
     <div class="activity-container">
         <a href="../vocabulary.html" class="back-link">&larr; Go back to activities</a>
         <div class="roadmap">
@@ -213,7 +213,7 @@
 
             itemsData.forEach(item => {
                 const img = document.createElement('img');
-                img.src = `../../files/images/vocabulary/classroomobjects/${item.id}.png`;
+                img.src = `../../../files/images/vocabulary/classroomobjects/${item.id}.png`;
                 img.id = `item-${item.id}`;
                 img.className = 'draggable-item';
                 img.draggable = true;
@@ -258,7 +258,7 @@
         function setupActivity2() {
             itemsData.forEach(item => {
                 const img = document.createElement('img');
-                img.src = `../../files/images/vocabulary/classroomobjects/${item.id}.png`;
+                img.src = `../../../files/images/vocabulary/classroomobjects/${item.id}.png`;
                 img.id = `sceneitem-${item.id}`;
                 img.className = 'draggable-item';
                 img.draggable = true;
