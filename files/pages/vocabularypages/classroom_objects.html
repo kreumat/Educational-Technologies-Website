@@ -15,7 +15,7 @@
         }
         .description-text {
             flex-grow: 1; /* Allows text to take available space */
-            margin-right: 1rem;
+            margin-right: 0.5rem;
         }
         .drop-target {
             width: 50px;
@@ -80,6 +80,10 @@
             object-fit: contain; /* Scales the image to fit while maintaining aspect ratio */
             cursor: grab;
         }
+		
+        .mobileviewdescription {
+			padding-bottom: 20px;
+        }
 
         .item-container.used {
             opacity: 0.4;
@@ -118,6 +122,7 @@
     <div class="activity-container">
         <a href="../vocabulary.html" class="back-link">&larr; Go back to activities</a>
         <h1>Vocabulary Activity: Classroom Objects</h1>
+		<p class="mobileviewdescription">If you are using a tablet or smartphone, instead of dragging, tap to select the pictures and then tap their target location.</p>
 
         <!-- Activity 1: Description Matching -->
         <section id="activity1">
@@ -334,12 +339,6 @@
                 message.textContent = 'Congratulations! You completed the activity.';
                 message.style.display = 'block'; // Make it visible
                 title.insertAdjacentElement('afterend', message);
-            }
-
-            // Make the "Go back" link glow
-            const backLink = document.querySelector('.back-link');
-            if (backLink) {
-                backLink.classList.add('glow');
             }
         }
     });
