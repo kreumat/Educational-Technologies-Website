@@ -61,6 +61,31 @@
             0%, 100% { box-shadow: 0 0 5px var(--secondary-color); }
             50% { box-shadow: 0 0 20px var(--secondary-color); }
         }
+
+        /* Grid layout for desktop */
+        #itemsGrid1, #dropZones1 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .draggable-item.selected {
+                border: 3px solid blue;
+                border-radius: 8px;
+            }
+            .draggable-item.used {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+            .drop-target.incorrect-mobile {
+                border: 2px solid red;
+            }
+            .items-grid.glow-hint {
+                box-shadow: 0 0 15px lightblue;
+                transition: box-shadow 0.3s ease-in-out;
+            }
+        }
     </style>
 </head>
 <body>
@@ -194,6 +219,75 @@
 
         // --- INITIALIZE ---
         setupActivity1();
+
+        // --- MOBILE CLICK-TO-MATCH LOGIC ---
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        if (isMobile) {
+            let selectedImage = null;
+
+            // Remove drag-and-drop listeners and add click listeners
+            const draggables = document.querySelectorAll('.draggable-item');
+            const dropTargets = document.querySelectorAll('.drop-target');
+
+            draggables.forEach(item => {
+                item.draggable = false;
+                item.removeEventListener('dragstart', handleDragStart);
+                item.addEventListener('click', handleImageClick);
+            });
+
+            dropTargets.forEach(target => {
+                target.removeEventListener('dragover', handleDragOver);
+                target.removeEventListener('dragleave', handleDragLeave);
+                target.removeEventListener('drop', handleDropActivity1);
+                target.addEventListener('click', handleTargetClick);
+            });
+
+            function handleImageClick(e) {
+                // Remove 'selected' from any other item
+                draggables.forEach(img => img.classList.remove('selected'));
+                // Add 'selected' to the clicked item
+                e.currentTarget.classList.add('selected');
+                selectedImage = e.currentTarget;
+                // Remove glow hint if present
+                itemsGrid1.classList.remove('glow-hint');
+            }
+
+            function handleTargetClick(e) {
+                const dropTarget = e.currentTarget;
+
+                if (!selectedImage) {
+                    // Hint to the user to select an image first
+                    itemsGrid1.classList.add('glow-hint');
+                    setTimeout(() => itemsGrid1.classList.remove('glow-hint'), 1000);
+                    return;
+                }
+
+                if (selectedImage.dataset.itemId === dropTarget.dataset.itemId) {
+                    dropTarget.innerHTML = '';
+                    const clonedImage = selectedImage.cloneNode(true);
+                    clonedImage.classList.remove('selected');
+                    clonedImage.style.cursor = 'default';
+                    dropTarget.appendChild(clonedImage);
+
+                    selectedImage.classList.remove('selected');
+                    selectedImage.classList.add('used');
+                    correctSound.play();
+                    correctMatches1++;
+                    selectedImage = null;
+
+                    if (correctMatches1 === itemsData.length) {
+                        const nextButton = document.getElementById('nextActivityBtn');
+                        if (nextButton) {
+                            nextButton.classList.add('active');
+                        }
+                    }
+                } else {
+                    // Incorrect match feedback
+                    dropTarget.classList.add('incorrect-mobile');
+                    setTimeout(() => dropTarget.classList.remove('incorrect-mobile'), 1000);
+                }
+            }
+        }
     });
     </script>
 </body>
