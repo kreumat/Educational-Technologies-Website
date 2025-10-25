@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Activities - Classroom Life</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* New styles for the vocabulary hub page */
+        .vocabulary-hub {
+            text-align: center;
+            padding: 2rem;
+        }
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            justify-items: center;
+        }
+        .activity-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border-radius: 15px;
+            background-color: #f0f8ff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            min-height: 180px;
+            width: 100%;
+            max-width: 220px;
+        }
+        .activity-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .activity-btn img {
+            max-width: 100px;
+            margin-bottom: 1rem;
+        }
+        .colours-btn-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+             margin-bottom: 1rem;
+        }
+        .colour-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .red { background-color: #ff5e5e; }
+        .green { background-color: #5eff79; }
+        .blue { background-color: #5e95ff; }
+
+        .numbers-btn-visual {
+            font-size: 3rem;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            color: #0056b3;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="site-title">
+                <h1><a href="../index.html">Classroom Life 🚀</a></h1>
+            </div>
+            <nav class="main-nav">
+                <button class="nav-toggle" aria-label="toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="./learning_outcomes.html">Learning Outcomes</a></li>
+                    <li><a href="./vocabulary.html">Vocabulary</a></li>
+                    <li><a href="#">Reading</a></li>
+                    <li><a href="#">Listening</a></li>
+                    <li><a href="#">Pronunciation</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="vocabulary-hub">
+                <h1>Vocabulary Activities</h1>
+                <p>This section has four topics: Classroom Objects, Instructions, Colours, and Numbers. Click the buttons below to practice!</p>
+
+                <div class="activity-grid">
+                    <a href="./vocabularypages/classroom_objects.html" class="activity-btn">
+                        <img src="../files/images/vocabulary/icons/classroomobjects.png" alt="Classroom Objects">
+                        <span>Classroom Objects</span>
+                    </a>
+                    <a href="./vocabularypages/instructions.html" class="activity-btn">
+                        <img src="../files/images/vocabulary/icons/instructions.png" alt="Instructions">
+                        <span>Instructions</span>
+                    </a>
+                    <a href="./vocabularypages/colours.html" class="activity-btn">
+                        <div class="colours-btn-visual">
+                            <div class="colour-circle red"></div>
+                            <div class="colour-circle green"></div>
+                            <div class="colour-circle blue"></div>
+                        </div>
+                        <span>Colours</span>
+                    </a>
+                    <a href="./vocabularypages/numbers.html" class="activity-btn">
+                        <div class="numbers-btn-visual">1-2-3</div>
+                        <span>Numbers</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+</body>
+</html>
