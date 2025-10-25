@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom Objects Activity</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <audio id="correctSound" src="../../../files/audio/apple.mp3" preload="auto"></audio>
+    <div class="activity-container">
+        <a href="../vocabulary.html" class="back-link">&larr; Go back to activities</a>
+        <div class="roadmap">
+            <span class="step active" id="step1">1. Matching</span> &rarr;
+            <span class="step" id="step2">2. Classroom Scene</span>
+        </div>
+
+        <!-- Activity 1: Description Matching -->
+        <section id="activity1">
+            <div class="draggable-items">
+                <h3>Drag the Picture</h3>
+                <div class="items-grid" id="itemsGrid1"></div>
+            </div>
+            <div class="drop-zones">
+                <h3>To the Correct Description</h3>
+                <div id="dropZones1"></div>
+            </div>
+        </section>
+
+        <!-- Activity 2: Classroom Scene -->
+        <section id="activity2">
+            <div class="scene-sidebar">
+                <h3>Drag the items to the scene</h3>
+                <div class="items-grid" id="itemsGrid2"></div>
+            </div>
+            <div class="scene-container" id="sceneContainer">
+                <!-- Drop zones will be added by JS -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const itemsData = [
+            { id: 'board', name: 'Board', description: 'The teacher writes on this.' },
+            { id: 'book', name: 'Book', description: 'We read stories from this.' },
+            { id: 'chair', name: 'Chair', description: 'We sit on this in the classroom.' },
+            { id: 'crayon', name: 'Crayon', description: 'We use this to color pictures.' },
+            { id: 'desk', name: 'Desk', description: 'We put our books on this.' },
+            { id: 'notebook', name: 'Notebook', description: 'We write in this with a pencil.' },
+            { id: 'pen', name: 'Pen', description: 'We use this to write with ink.' },
+            { id: 'pencil', name: 'Pencil', description: 'We use this to write and can erase it.' },
+            { id: 'pencilcase', name: 'Pencil Case', description: 'We put our pencils inside this.' },
+            { id: 'rubber', name: 'Rubber', description: 'We use this to erase mistakes.' },
+            { id: 'ruler', name: 'Ruler', description: 'We use this to draw straight lines.' },
+            { id: 'schoolbag', name: 'Schoolbag', description: 'We carry our books in this.' },
+            { id: 'scissors', name: 'Scissors', description: 'We use these to cut paper.' },
+            { id: 'sharpener', name: 'Sharpener', description: 'This makes our pencils sharp.' },
+            { id: 'table', name: 'Table', description: 'A piece of furniture with a flat top and one or more legs.' }
+        ];
+
+        const correctSound = document.getElementById('correctSound');
+        let correctMatches1 = 0;
+        let correctMatches2 = 0;
+
+        // --- ACTIVITY 1 SETUP ---
+        const itemsGrid1 = document.getElementById('itemsGrid1');
+        const dropZones1 = document.getElementById('dropZones1');
+
+        function setupActivity1() {
+            const shuffledDescriptions = [...itemsData].sort(() => Math.random() - 0.5);
+
+            itemsData.forEach(item => {
+                const img = document.createElement('img');
+                img.src = `../../../files/images/vocabulary/classroomobjects/${item.id}.png`;
+                img.id = `item-${item.id}`;
+                img.className = 'draggable-item';
+                img.draggable = true;
+                img.dataset.itemId = item.id;
+                img.addEventListener('dragstart', handleDragStart);
+                itemsGrid1.appendChild(img);
+            });
+
+            shuffledDescriptions.forEach(item => {
+                const dropZone = document.createElement('div');
+                dropZone.className = 'drop-zone';
+                dropZone.dataset.itemId = item.id;
+                dropZone.textContent = item.description;
+                dropZone.addEventListener('dragover', handleDragOver);
+                dropZone.addEventListener('dragleave', handleDragLeave);
+                dropZone.addEventListener('drop', handleDropActivity1);
+                dropZones1.appendChild(dropZone);
+            });
+        }
+
+        // --- ACTIVITY 2 SETUP ---
+        const itemsGrid2 = document.getElementById('itemsGrid2');
+        const sceneContainer = document.getElementById('sceneContainer');
+        const sceneDropZonePositions = [
+            { id: 'board', top: '10%', left: '30%', width: '40%', height: '30%' },
+            { id: 'desk', top: '60%', left: '25%', width: '20%', height: '20%' },
+            { id: 'chair', top: '62%', left: '50%', width: '15%', height: '25%' },
+            { id: 'table', top: '70%', left: '5%', width: '15%', height: '15%' },
+            { id: 'schoolbag', top: '75%', left: '70%', width: '12%', height: '15%' },
+            { id: 'book', top: '55%', left: '30%', width: '8%', height: '5%' },
+            { id: 'notebook', top: '56%', left: '40%', width: '7%', height: '4%' },
+            { id: 'pencilcase', top: '54%', left: '22%', width: '10%', height: '5%' },
+            { id: 'pencil', top: '53%', left: '42%', width: '5%', height: '2%' },
+            { id: 'pen', top: '52%', left: '38%', width: '5%', height: '2%' },
+            { id: 'rubber', top: '57%', left: '25%', width: '4%', height: '3%' },
+            { id: 'ruler', top: '50%', left: '20%', width: '10%', height: '2%' },
+            { id: 'scissors', top: '51%', left: '45%', width: '6%', height: '4%' },
+            { id: 'sharpener', top: '55%', left: '20%', width: '3%', height: '3%' },
+            { id: 'crayon', top: '58%', left: '48%', width: '4%', height: '2%' }
+        ];
+
+        function setupActivity2() {
+            itemsData.forEach(item => {
+                const img = document.createElement('img');
+                img.src = `../../../files/images/vocabulary/classroomobjects/${item.id}.png`;
+                img.id = `sceneitem-${item.id}`;
+                img.className = 'draggable-item';
+                img.draggable = true;
+                img.dataset.itemId = item.id;
+                img.addEventListener('dragstart', handleDragStart);
+                itemsGrid2.appendChild(img);
+            });
+
+            sceneDropZonePositions.forEach(pos => {
+                const dropZone = document.createElement('div');
+                dropZone.className = 'scene-drop-zone';
+                dropZone.dataset.itemId = pos.id;
+                dropZone.style.top = pos.top;
+                dropZone.style.left = pos.left;
+                dropZone.style.width = pos.width;
+                dropZone.style.height = pos.height;
+                const itemData = itemsData.find(i => i.id === pos.id);
+                dropZone.textContent = itemData ? itemData.name : '';
+
+                dropZone.addEventListener('dragover', handleDragOver);
+                dropZone.addEventListener('dragleave', handleDragLeave);
+                dropZone.addEventListener('drop', handleDropActivity2);
+                sceneContainer.appendChild(dropZone);
+            });
+        }
+
+        // --- DRAG & DROP HANDLERS ---
+        function handleDragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.id);
+        }
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('hovered');
+        }
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('hovered');
+        }
+
+        function handleDropActivity1(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('hovered');
+            const draggedItemId = e.dataTransfer.getData('text/plain');
+            const draggedItem = document.getElementById(draggedItemId);
+            const dropZone = e.currentTarget;
+
+            if (draggedItem.dataset.itemId === dropZone.dataset.itemId) {
+                dropZone.innerHTML = '';
+                dropZone.appendChild(draggedItem);
+                dropZone.classList.add('correct');
+                draggedItem.draggable = false;
+                draggedItem.style.cursor = 'default';
+                correctSound.play();
+                correctMatches1++;
+                if (correctMatches1 === itemsData.length) {
+                    setTimeout(startActivity2, 1000);
+                }
+            } else {
+                dropZone.classList.add('incorrect');
+                setTimeout(() => dropZone.classList.remove('incorrect'), 500);
+            }
+        }
+
+        function handleDropActivity2(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('hovered');
+            const draggedItemId = e.dataTransfer.getData('text/plain');
+            const draggedItem = document.getElementById(draggedItemId);
+            const dropZone = e.currentTarget;
+
+            if (draggedItem.dataset.itemId === dropZone.dataset.itemId) {
+                dropZone.innerHTML = '';
+                dropZone.appendChild(draggedItem);
+                dropZone.classList.add('correct');
+                draggedItem.draggable = false;
+                draggedItem.style.cursor = 'default';
+                draggedItem.style.width = '100%';
+                draggedItem.style.height = '100%';
+                correctSound.play();
+                correctMatches2++;
+            }
+        }
+
+        // --- ACTIVITY TRANSITION ---
+        function startActivity2() {
+            document.getElementById('activity1').classList.add('hidden');
+            document.getElementById('activity2').style.display = 'flex';
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+            setupActivity2();
+        }
+
+        // --- INITIALIZE ---
+        setupActivity1();
+    });
+    </script>
+</body>
+</html>
