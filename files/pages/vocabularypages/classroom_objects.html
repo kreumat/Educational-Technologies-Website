@@ -69,13 +69,44 @@
             gap: 1rem;
         }
 
+        .item-container {
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            padding: 0.5rem;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s, opacity 0.2s;
+            /* New sizing rules for consistency */
+            height: 80px; /* Adjust height as needed */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        .draggable-item {
+            max-width: 100%;
+            max-height: 100%; /* Ensure image fits within the container's height */
+            height: auto;
+            width: auto;
+            object-fit: contain; /* Scales the image to fit while maintaining aspect ratio */
+            cursor: grab;
+        }
+
+        .item-container.used {
+            opacity: 0.4;
+            background-color: #e9e9e9;
+        }
+
+
         @media (max-width: 768px) {
-            .draggable-item.selected {
-                border: 3px solid blue;
-                border-radius: 8px;
+            .item-container {
+                height: 60px; /* Adjust for smaller screens */
             }
-            .draggable-item.used {
-                opacity: 0.5;
+            .item-container.selected {
+                border: 3px solid blue;
+            }
+            /* The .used class is now on the container */
+            .item-container.used {
                 pointer-events: none;
             }
             .drop-target.incorrect-mobile {
@@ -144,14 +175,25 @@
             const shuffledDescriptions = [...itemsData].sort(() => Math.random() - 0.5);
 
             itemsData.forEach(item => {
+                // Create the container
+                const container = document.createElement('div');
+                container.className = 'item-container';
+                container.dataset.itemId = item.id; // Keep the ID on the container for mobile logic
+
+                // Create the image
                 const img = document.createElement('img');
                 img.src = `../../../files/images/vocabulary/classroomobjects/${item.id}.png`;
                 img.id = `item-${item.id}`;
                 img.className = 'draggable-item';
                 img.draggable = true;
-                img.dataset.itemId = item.id;
+                img.dataset.itemId = item.id; // Also on the image for drag/drop logic
+
+                // Add listeners to the container for mobile, but image for desktop
+                container.appendChild(img);
+                itemsGrid1.appendChild(container);
+
+                // Add desktop drag listener to the image itself
                 img.addEventListener('dragstart', handleDragStart);
-                itemsGrid1.appendChild(img);
             });
 
             shuffledDescriptions.forEach(item => {
@@ -225,14 +267,18 @@
         if (isMobile) {
             let selectedImage = null;
 
-            // Remove drag-and-drop listeners and add click listeners
-            const draggables = document.querySelectorAll('.draggable-item');
+            // On mobile, interactions are with the container, not the image
+            const itemContainers = document.querySelectorAll('.item-container');
             const dropTargets = document.querySelectorAll('.drop-target');
 
-            draggables.forEach(item => {
-                item.draggable = false;
-                item.removeEventListener('dragstart', handleDragStart);
-                item.addEventListener('click', handleImageClick);
+            itemContainers.forEach(container => {
+                // Disable dragging on the image inside
+                const img = container.querySelector('.draggable-item');
+                if (img) {
+                    img.draggable = false;
+                }
+                // Add click listener to the container
+                container.addEventListener('click', handleImageClick);
             });
 
             dropTargets.forEach(target => {
@@ -243,11 +289,12 @@
             });
 
             function handleImageClick(e) {
-                // Remove 'selected' from any other item
-                draggables.forEach(img => img.classList.remove('selected'));
-                // Add 'selected' to the clicked item
-                e.currentTarget.classList.add('selected');
-                selectedImage = e.currentTarget;
+                const clickedContainer = e.currentTarget;
+                // Remove 'selected' from any other container
+                itemContainers.forEach(container => container.classList.remove('selected'));
+                // Add 'selected' to the clicked container
+                clickedContainer.classList.add('selected');
+                selectedImage = clickedContainer; // This now holds the container
                 // Remove glow hint if present
                 itemsGrid1.classList.remove('glow-hint');
             }
@@ -262,18 +309,21 @@
                     return;
                 }
 
+                // Check the dataset ID from the selected container
                 if (selectedImage.dataset.itemId === dropTarget.dataset.itemId) {
                     dropTarget.innerHTML = '';
-                    const clonedImage = selectedImage.cloneNode(true);
-                    clonedImage.classList.remove('selected');
+                    // Find the image inside the container to clone it
+                    const imageToClone = selectedImage.querySelector('.draggable-item');
+                    const clonedImage = imageToClone.cloneNode(true);
                     clonedImage.style.cursor = 'default';
                     dropTarget.appendChild(clonedImage);
 
+                    // Update the container's state
                     selectedImage.classList.remove('selected');
                     selectedImage.classList.add('used');
                     correctSound.play();
                     correctMatches1++;
-                    selectedImage = null;
+                    selectedImage = null; // Reset selection
 
                     if (correctMatches1 === itemsData.length) {
                         const nextButton = document.getElementById('nextActivityBtn');
