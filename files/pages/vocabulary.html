@@ -60,5 +60,18 @@
         </div>
     </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navToggle = document.querySelector('.nav-toggle');
+            const navUl = document.querySelector('.main-nav ul');
+
+            if (navToggle && navUl) {
+                navToggle.addEventListener('click', () => {
+                    navUl.classList.toggle('active');
+                    navToggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
