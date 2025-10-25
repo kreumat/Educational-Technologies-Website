@@ -669,6 +669,21 @@ header {
     text-align: center;
 }
 
+.listen-repeat-body #mic-status {
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    min-height: 1.5rem;
+}
+
+.listen-repeat-body .mic-status-listening {
+    color: #28a745;
+}
+
+.listen-repeat-body .mic-status-idle {
+    color: #6c757d;
+}
+
 .listen-repeat-body .message-correct {
     color: #28a745;
 }
@@ -683,6 +698,11 @@ header {
 
 .listen-repeat-body .final-completion {
     animation: glow 2s infinite alternate;
+}
+
+.back-link.glow {
+    animation: glow 1.5s infinite ease-in-out;
+    border-radius: var(--border-radius); /* Add radius for glow effect */
 }
 
 @keyframes pulse {

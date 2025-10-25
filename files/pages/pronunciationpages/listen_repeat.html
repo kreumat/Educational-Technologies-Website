@@ -29,6 +29,7 @@
     <div class="feedback-container">
         <p>Right now you are saying: <span id="feedback-text">-</span></p>
     </div>
+    <div id="mic-status" class="mic-status-idle">Click the microphone to start speaking</div>
     <div id="message-container"></div>
 
     <script>
@@ -51,6 +52,7 @@
             const feedbackText = document.getElementById('feedback-text');
             const messageContainer = document.getElementById('message-container');
             const activityContainer = document.querySelector('.activity-container');
+            const micStatus = document.getElementById('mic-status');
 
             const audio = new Audio('../../audio/apple.mp3');
 
@@ -114,15 +116,21 @@
                     feedbackText.textContent = '-';
                     messageContainer.innerHTML = '';
                     micBtn.disabled = false;
+                    updateMicStatus(false);
                 } else {
                     showCompletionMessage();
                 }
             }
 
             function showCompletionMessage() {
+                const backLink = document.querySelector('.back-link');
+                const feedbackContainer = document.querySelector('.feedback-container');
+
                 activityContainer.style.display = 'none';
-                feedbackText.textContent = '-';
+                if(feedbackContainer) feedbackContainer.style.display = 'none';
+                micStatus.style.display = 'none';
                 messageContainer.innerHTML = `<span class="final-completion">You completed the activity!</span>`;
+                if(backLink) backLink.classList.add('glow');
             }
 
             function displayMessage(text, type) {
@@ -131,18 +139,30 @@
                 messageContainer.innerHTML = `<p class="${className}">${text}</p>`;
             }
 
+            function updateMicStatus(isListening) {
+                if (isListening) {
+                    micStatus.textContent = 'Listening...';
+                    micStatus.className = 'mic-status-listening';
+                } else {
+                    micStatus.textContent = 'Click the microphone to start speaking';
+                    micStatus.className = 'mic-status-idle';
+                }
+            }
+
             function startListening() {
                 if (!recognition) return;
 
                 micBtn.classList.add('listening');
                 micBtn.disabled = true;
                 feedbackText.textContent = '...';
+                updateMicStatus(true);
                 recognition.start();
 
                 clearTimeout(timeoutId);
                 timeoutId = setTimeout(() => {
                     recognition.stop();
                     displayMessage('Try Again!', 'error');
+                    updateMicStatus(false);
                     micBtn.disabled = false;
                 }, 20000); // 20-second timer
             }
@@ -151,6 +171,7 @@
                 if (!recognition) return;
                 micBtn.classList.remove('listening');
                 clearTimeout(timeoutId);
+                updateMicStatus(false);
             }
 
             function checkAnswer(transcript) {
@@ -161,6 +182,7 @@
                     clearTimeout(timeoutId);
                     recognition.stop();
                     displayMessage("That's Right!", 'correct');
+                    updateMicStatus(false);
 
                     let countdown = 3;
                     const countdownInterval = setInterval(() => {
