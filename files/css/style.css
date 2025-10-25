@@ -391,6 +391,15 @@ header {
     margin-top: 2rem;
     justify-items: center;
 }
+/* On larger screens, force a 2x2 grid */
+@media (min-width: 769px) {
+    .activity-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 600px; /* Adjust as needed */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 .activity-btn {
     display: flex;
     flex-direction: column;
@@ -418,7 +427,8 @@ header {
 }
 .colours-btn-visual {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Changed to row for horizontal layout */
+    justify-content: center; /* Center the dots */
     align-items: center;
     gap: 8px;
      margin-bottom: 1rem;
