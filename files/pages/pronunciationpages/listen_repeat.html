@@ -8,20 +8,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="listen-repeat-body">
-    <a href="../pronunciation.html" class="go-back-link">Go back to Pronunciation</a>
     <div class="activity-container">
-        <div class="card listen-card">
-            <h2 id="word-display">Word</h2>
-            <button id="listen-btn" class="icon-btn">
-                <i class="fas fa-volume-up"></i>
-            </button>
-            <p class="card-description">Click the speaker to listen</p>
-        </div>
-        <div class="card pronunciation-card">
-            <button id="mic-btn" class="icon-btn">
-                <i class="fas fa-microphone"></i>
-            </button>
-            <p class="card-description">Click the mic to speak</p>
+        <a href="../pronunciation.html" class="back-link">&larr; Go back to Pronunciation</a>
+        <div class="cards-wrapper">
+            <div class="card listen-card">
+                <h2 id="word-display">Word</h2>
+                <button id="listen-btn" class="icon-btn">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <p class="card-description">Click the speaker to listen</p>
+            </div>
+            <div class="card pronunciation-card">
+                <button id="mic-btn" class="icon-btn">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <p class="card-description">Click the mic to speak</p>
+            </div>
         </div>
     </div>
     <div class="feedback-container">
@@ -150,6 +152,7 @@
             function checkAnswer(transcript) {
                 const currentWord = shuffledWords[currentWordIndex].toLowerCase();
                 if (transcript === currentWord) {
+                    micBtn.disabled = true; // Disable the button immediately
                     clearTimeout(timeoutId);
                     recognition.stop();
                     displayMessage("That's Right!", 'correct');
