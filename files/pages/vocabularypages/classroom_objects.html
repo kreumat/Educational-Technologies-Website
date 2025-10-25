@@ -33,33 +33,22 @@
             height: 100%;
             object-fit: contain;
         }
-        /* Next Activity Button */
-        #nextActivityBtn {
-            display: block;
-            width: fit-content;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
+        /* Completion styles */
+        .completion-message {
+            display: none; /* Hidden by default */
+            text-align: center;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: white;
-            background-color: var(--primary-color);
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            text-decoration: none;
-            /* Disabled state */
-            opacity: 0.5;
-            pointer-events: none;
-            transition: opacity 0.3s ease, box-shadow 0.3s ease;
+            color: #28a745; /* Cheerful green */
+            margin-top: 1rem;
         }
-        #nextActivityBtn.active {
-            opacity: 1;
-            pointer-events: auto;
+        .back-link.glow {
             animation: glow 1.5s infinite ease-in-out;
+            border-radius: var(--border-radius); /* Add radius for glow effect */
         }
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px var(--secondary-color); }
-            50% { box-shadow: 0 0 20px var(--secondary-color); }
+            0%, 100% { box-shadow: 0 0 8px var(--secondary-color); }
+            50% { box-shadow: 0 0 25px var(--secondary-color); }
         }
 
         /* Grid layout for desktop */
@@ -128,9 +117,7 @@
     <audio id="correctSound" src="../../../files/audio/apple.mp3" preload="auto"></audio>
     <div class="activity-container">
         <a href="../vocabulary.html" class="back-link">&larr; Go back to activities</a>
-        <div class="roadmap">
-            <span class="step active" id="step1">1. Matching</span>
-        </div>
+        <h1>Vocabulary Activity: Classroom Objects</h1>
 
         <!-- Activity 1: Description Matching -->
         <section id="activity1">
@@ -146,8 +133,6 @@
 
         <!-- Activity 2 has been removed -->
     </div>
-
-    <a id="nextActivityBtn" href="./classroom_objects_2.html">Next Activity</a>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -255,10 +240,7 @@
                 correctMatches1++;
 
                 if (correctMatches1 === itemsData.length) {
-                    const nextButton = document.getElementById('nextActivityBtn');
-                    if (nextButton) {
-                        nextButton.classList.add('active');
-                    }
+                    showCompletionFeedback();
                 }
             } else {
                 dropZone.classList.add('incorrect');
@@ -333,16 +315,31 @@
                     selectedImage = null; // Reset selection
 
                     if (correctMatches1 === itemsData.length) {
-                        const nextButton = document.getElementById('nextActivityBtn');
-                        if (nextButton) {
-                            nextButton.classList.add('active');
-                        }
+                        showCompletionFeedback();
                     }
                 } else {
                     // Incorrect match feedback
                     dropTarget.classList.add('incorrect-mobile');
                     setTimeout(() => dropTarget.classList.remove('incorrect-mobile'), 1000);
                 }
+            }
+        }
+
+        function showCompletionFeedback() {
+            // Create and display the completion message
+            const title = document.querySelector('h1');
+            if (title) {
+                const message = document.createElement('p');
+                message.className = 'completion-message';
+                message.textContent = 'Congratulations! You completed the activity.';
+                message.style.display = 'block'; // Make it visible
+                title.insertAdjacentElement('afterend', message);
+            }
+
+            // Make the "Go back" link glow
+            const backLink = document.querySelector('.back-link');
+            if (backLink) {
+                backLink.classList.add('glow');
             }
         }
     });
