@@ -879,7 +879,6 @@ header {
 
 .readable-background {
     background-color: #FFFFFF;
-    border: 2px solid var(--accent-color);
     padding: 10px;
     border-radius: 8px;
     display: inline-block;
