@@ -39,7 +39,7 @@
                 <source src="../audio/listeningaudio.wav" type="audio/wav">
                 Your browser does not support the audio element.
             </audio>
-            <p>Click 'play' on the audio player above to start.</p>
+            <p class="audio-instructions">Click 'play' on the audio player above to start.</p>
 
             <div id="listening-quiz-container">
                 <div class="quiz-question" id="q1">
@@ -157,16 +157,19 @@
                 const currentQuestion = option.closest('.quiz-question');
 
                 if (isCorrect) {
-                    const currentQuestionId = parseInt(currentQuestion.id.replace('q', ''));
-                    const nextQuestion = document.getElementById(`q${currentQuestionId + 1}`);
+                    option.classList.add('correct');
+                    setTimeout(() => {
+                        const currentQuestionId = parseInt(currentQuestion.id.replace('q', ''));
+                        const nextQuestion = document.getElementById(`q${currentQuestionId + 1}`);
 
-                    currentQuestion.style.display = 'none';
+                        currentQuestion.style.display = 'none';
 
-                    if (nextQuestion) {
-                        nextQuestion.style.display = 'block';
-                    } else {
-                        completionMessage.style.display = 'block';
-                    }
+                        if (nextQuestion) {
+                            nextQuestion.style.display = 'block';
+                        } else {
+                            completionMessage.style.display = 'block';
+                        }
+                    }, 1000); // 1-second delay
                 } else {
                     option.classList.add('incorrect');
                     setTimeout(() => {
