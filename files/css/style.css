@@ -191,6 +191,14 @@ header {
     color: #666;
 }
 
+.construction-note {
+    display: block;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #d9534f;
+    margin-top: 8px;
+}
+
 /* --- Signature Container --- */
 .signature-container {
     position: absolute;
