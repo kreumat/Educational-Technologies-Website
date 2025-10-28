@@ -867,3 +867,39 @@ header {
         transition: box-shadow 0.3s ease-in-out;
     }
 }
+
+/* --- Hub Page Visuals --- */
+.hub-background {
+    background-image: url('../images/other/visualelements/classroombackground.png');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.floating-element {
+    position: fixed;
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+    max-width: 120px;
+}
+
+@media (max-width: 768px) {
+    .floating-element {
+        display: none;
+    }
+}
