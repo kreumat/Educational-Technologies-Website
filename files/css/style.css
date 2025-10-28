@@ -878,11 +878,14 @@ header {
 }
 
 .readable-background {
-    background-color: #FFFFF0;
-    border: 2px solid #8B4513;
+    background-color: #FFFFFF;
+    border: 2px solid var(--accent-color);
     padding: 10px;
     border-radius: 8px;
     display: inline-block;
     margin: 0.5rem 0;
 }
 
+.large-padding {
+    padding: 25px;
+}
