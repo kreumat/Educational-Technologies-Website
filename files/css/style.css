@@ -867,3 +867,25 @@ header {
         transition: box-shadow 0.3s ease-in-out;
     }
 }
+
+/* --- Hub Page Visuals --- */
+.hub-background {
+    background-image: url('../images/other/visualelements/classroombackground.png');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.readable-background {
+    background-color: #FFFFFF;
+    border: 2px solid var(--accent-color);
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    margin: 0.5rem 0;
+}
+
+.large-padding {
+    padding: 25px;
+}
