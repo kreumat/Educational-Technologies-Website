@@ -877,29 +877,12 @@ header {
     background-repeat: no-repeat;
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
+.readable-background {
+    background-color: #FFFFF0;
+    border: 2px solid #8B4513;
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+    margin: 0.5rem 0;
 }
 
-.floating-element {
-    position: fixed;
-    width: 100px; /* Adjust size as needed */
-    height: auto;
-    z-index: 1;
-    animation: float 6s ease-in-out infinite;
-    max-width: 120px;
-}
-
-@media (max-width: 768px) {
-    .floating-element {
-        display: none;
-    }
-}
