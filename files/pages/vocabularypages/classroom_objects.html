@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="classroom-objects-page">
-    <audio id="correctSound" src="../../../files/audio/apple.mp3" preload="auto"></audio>
     <div class="activity-container">
         <a href="../vocabulary.html" class="back-link">&larr; Go back to activities</a>
         <h1>Vocabulary Activity: Classroom Objects</h1>
@@ -49,7 +48,6 @@
             { id: 'table', name: 'Table', description: 'A piece of furniture with a flat top and one or more legs.' }
         ];
 
-        const correctSound = document.getElementById('correctSound');
         let correctMatches1 = 0;
 
         // --- ACTIVITY 1 SETUP ---
@@ -131,7 +129,6 @@
                 dropZone.classList.add('correct');
                 draggedItem.draggable = false;
                 draggedItem.style.cursor = 'default';
-                correctSound.play();
                 correctMatches1++;
 
                 if (correctMatches1 === itemsData.length) {
@@ -205,7 +202,6 @@
                     // Update the container's state
                     selectedImage.classList.remove('selected');
                     selectedImage.classList.add('used');
-                    correctSound.play();
                     correctMatches1++;
                     selectedImage = null; // Reset selection
 

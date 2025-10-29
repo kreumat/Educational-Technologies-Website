@@ -35,11 +35,51 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const words = [
-                'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'red', 'white', 'blue', 'brown', 'purple', 'pink', 'green', 'yellow', 'black', 'orange', 'desk', 'pencil', 'table', 'sharpener', 'eraser'
+            
+            // --- DEĞİŞİKLİK 1: YENİ VERİ YAPISI ---
+            // 'words' dizisi yerine, her kelime için bir obje içeren 'wordData' dizisi kullanıyoruz.
+            // Bu "pre-set" yapı, her kelime için özel ses dosyası ve kabul edilen cevapları belirler.
+            const wordData = [
+                { display: 'zero', audio: '../../audio/zero.wav', accepted: ['zero', '0'] },
+                { display: 'one', audio: '../../audio/one.wav', accepted: ['one', '1'] },
+                { display: 'two', audio: '../../audio/two.wav', accepted: ['two', '2'] },
+                { display: 'three', audio: '../../audio/three.wav', accepted: ['three', '3'] },
+                { display: 'four', audio: '../../audio/four.wav', accepted: ['four', '4'] },
+                { display: 'five', audio: '../../audio/five.wav', accepted: ['five', '5'] },
+                { display: 'six', audio: '../../audio/six.wav', accepted: ['six', '6'] },
+                { display: 'seven', audio: '../../audio/seven.wav', accepted: ['seven', '7'] },
+                { display: 'eight', audio: '../../audio/eight.wav', accepted: ['eight', '8'] },
+                { display: 'nine', audio: '../../audio/nine.wav', accepted: ['nine', '9'] },
+                { display: 'ten', audio: '../../audio/ten.wav', accepted: ['ten', '10'] },
+                { display: 'eleven', audio: '../../audio/eleven.wav', accepted: ['eleven', '11'] },
+                { display: 'twelve', audio: '../../audio/twelve.wav', accepted: ['twelve', '12'] },
+                { display: 'thirteen', audio: '../../audio/thirteen.wav', accepted: ['thirteen', '13'] },
+                { display: 'fourteen', audio: '../../audio/fourteen.wav', accepted: ['fourteen', '14'] },
+                { display: 'fifteen', audio: '../../audio/fifteen.wav', accepted: ['fifteen', '15'] },
+                { display: 'sixteen', audio: '../../audio/sixteen.wav', accepted: ['sixteen', '16'] },
+                { display: 'seventeen', audio: '../../audio/seventeen.wav', accepted: ['seventeen', '17'] },
+                { display: 'eighteen', audio: '../../audio/eighteen.wav', accepted: ['eighteen', '18'] },
+                { display: 'nineteen', audio: '../../audio/nineteen.wav', accepted: ['nineteen', '19'] },
+                { display: 'twenty', audio: '../../audio/twenty.wav', accepted: ['twenty', '20'] },
+                // Renkler ve nesneler için sadece 1 kabul edilen cevap yeterli
+                { display: 'white', audio: '../../audio/white.wav', accepted: ['white'] },
+                { display: 'blue', audio: '../../audio/blue.wav', accepted: ['blue'] },
+                { display: 'brown', audio: '../../audio/brown.wav', accepted: ['brown'] },
+                { display: 'purple', audio: '../../audio/purple.wav', accepted: ['purple'] },
+                { display: 'pink', audio: '../../audio/pink.wav', accepted: ['pink'] },
+                { display: 'green', audio: '../../audio/green.wav', accepted: ['green'] },
+                { display: 'yellow', audio: '../../audio/yellow.wav', accepted: ['yellow'] },
+                { display: 'black', audio: '../../audio/black.wav', accepted: ['black'] },
+                { display: 'orange', audio: '../../audio/orange.wav', accepted: ['orange'] },
+                { display: 'desk', audio: '../../audio/desk.wav', accepted: ['desk'] },
+                { display: 'table', audio: '../../audio/table.wav', accepted: ['table'] },
+                { display: 'sharpener', audio: '../../audio/sharpener.wav', accepted: ['sharpener'] },
+                { display: 'eraser', audio: '../../audio/eraser.wav', accepted: ['eraser'] }
             ];
+            // NOT: 'audio' yolunu ('../../audio/') kendi dosya yapınıza göre 
+            // gerekirse düzeltin. Orijinal kodunuzdaki CSS yoluna göre tahmin yürüttüm.
 
-            let shuffledWords = [];
+            let shuffledWords = []; // Artık kelime objelerini tutacak
             let currentWordIndex = 0;
             let recognition;
             let timeoutId;
@@ -56,9 +96,10 @@
             const feedbackContainer = document.querySelector('.feedback-container');
             const cardsWrapper = document.querySelector('.cards-wrapper');
 
-            const audio = new Audio('../../audio/apple.mp3');
+            // Sabit 'audio' nesnesini kaldırıyoruz, çünkü her seferinde yeniden oluşturulacak.
+            // const audio = new Audio('../../audio/apple.mp3'); // <-- BU SATIRI SİLDİK
 
-            // Speech Recognition setup
+            // Speech Recognition setup (Aynı kalabilir)
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (SpeechRecognition) {
                 recognition = new SpeechRecognition();
@@ -110,15 +151,16 @@
             }
 
             function startGame() {
-                shuffledWords = shuffle([...words]);
+                shuffledWords = shuffle([...wordData]); // 'words' yerine 'wordData' kullan
                 currentWordIndex = 0;
                 displayNextWord();
             }
 
             function displayNextWord() {
                 if (currentWordIndex < shuffledWords.length) {
-                    isCorrect = false; // Reset the flag for the new word
-                    wordDisplay.textContent = shuffledWords[currentWordIndex];
+                    isCorrect = false; 
+                    // Görüntülenecek kelimeyi objeden al:
+                    wordDisplay.textContent = shuffledWords[currentWordIndex].display; 
                     feedbackText.textContent = '-';
                     messageContainer.innerHTML = '';
                     micBtn.disabled = false;
@@ -171,7 +213,7 @@
                     displayMessage('Try Again!', 'error');
                     updateMicStatus('idle');
                     micBtn.disabled = false;
-                }, 20000); // 20-second timer
+                }, 20000); 
             }
 
             function stopListening() {
@@ -181,11 +223,15 @@
                 updateMicStatus('idle');
             }
 
+            // --- DEĞİŞİKLİK 3: GÜNCELLENEN KONTROL FONKSİYONU ---
             function checkAnswer(transcript) {
-                const currentWord = shuffledWords[currentWordIndex].toLowerCase();
-                if (transcript === currentWord) {
-                    isCorrect = true; // Set the flag to true on a correct answer
-                    micBtn.disabled = true; // Disable the button immediately
+                // Mevcut kelimenin 'kabul edilen' cevaplar dizisini al
+                const acceptedAnswers = shuffledWords[currentWordIndex].accepted;
+
+                // Eğer kullanıcının söylediği (transcript), kabul edilen cevaplar listesinde varsa:
+                if (acceptedAnswers.includes(transcript)) {
+                    isCorrect = true; 
+                    micBtn.disabled = true; 
                     clearTimeout(timeoutId);
                     recognition.stop();
                     displayMessage("That's Right!", 'correct');
@@ -203,9 +249,25 @@
                     }, 1000);
 
                 }
+                // Yanlışsa (veya 'accepted' listesinde yoksa) hiçbir şey yapma.
+                // Zamanlayıcı (timeout) dolana kadar kullanıcı tekrar deneyebilir 
+                // veya 'onend' olayı tetiklenir.
             }
 
+            // --- DEĞİŞİKLİK 2: GÜNCELLENEN DİNLEME BUTONU ---
             listenBtn.addEventListener('click', () => {
+                // O anki kelime objesinden 'audio' yolunu al
+                const audioPath = shuffledWords[currentWordIndex].audio;
+                
+                // Her tıklamada doğru ses dosyası için yeni bir Audio nesnesi oluştur
+                const audio = new Audio(audioPath);
+                
+                // Ses dosyasının çalınamaması durumunda konsola hata yazdır
+                audio.onerror = () => {
+                    console.error(`Ses dosyası yüklenemedi: ${audioPath}`);
+                    displayMessage('Audio file could not be played.', 'error');
+                };
+                
                 audio.play();
             });
 
