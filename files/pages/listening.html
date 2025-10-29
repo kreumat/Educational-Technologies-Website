@@ -144,41 +144,53 @@
             </div>
         </div>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const quizContainer = document.getElementById('listening-quiz-container');
-            const questions = quizContainer.querySelectorAll('.quiz-question');
-            const completionMessage = document.getElementById('completion-message');
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			// --- Navigation Menu Code ---
+			const navToggle = document.querySelector('.nav-toggle');
+			const navUl = document.querySelector('.main-nav ul');
 
-            quizContainer.addEventListener('click', (e) => {
-                const option = e.target.closest('.quiz-option');
-                if (!option) return;
+			if (navToggle && navUl) {
+				navToggle.addEventListener('click', () => {
+					navUl.classList.toggle('active');
+					navToggle.classList.toggle('active');
+				});
+			}
+			
+			// --- Listening Quiz Code ---
+			const quizContainer = document.getElementById('listening-quiz-container');
+			const questions = quizContainer.querySelectorAll('.quiz-question');
+			const completionMessage = document.getElementById('completion-message');
 
-                const isCorrect = option.dataset.correct === 'true';
-                const currentQuestion = option.closest('.quiz-question');
+			quizContainer.addEventListener('click', (e) => {
+				const option = e.target.closest('.quiz-option');
+				if (!option) return;
 
-                if (isCorrect) {
-                    option.classList.add('correct');
-                    setTimeout(() => {
-                        const currentQuestionId = parseInt(currentQuestion.id.replace('q', ''));
-                        const nextQuestion = document.getElementById(`q${currentQuestionId + 1}`);
+				const isCorrect = option.dataset.correct === 'true';
+				const currentQuestion = option.closest('.quiz-question');
 
-                        currentQuestion.style.display = 'none';
+				if (isCorrect) {
+					option.classList.add('correct');
+					setTimeout(() => {
+						const currentQuestionId = parseInt(currentQuestion.id.replace('q', ''));
+						const nextQuestion = document.getElementById(`q${currentQuestionId + 1}`);
 
-                        if (nextQuestion) {
-                            nextQuestion.style.display = 'block';
-                        } else {
-                            completionMessage.style.display = 'block';
-                        }
-                    }, 1000); // 1-second delay
-                } else {
-                    option.classList.add('incorrect');
-                    setTimeout(() => {
-                        option.classList.remove('incorrect');
-                    }, 500);
-                }
-            });
-        });
-    </script>
+						currentQuestion.style.display = 'none';
+
+						if (nextQuestion) {
+							nextQuestion.style.display = 'block';
+						} else {
+							completionMessage.style.display = 'block';
+						}
+					}, 1000); // 1-second delay
+				} else {
+					option.classList.add('incorrect');
+					setTimeout(() => {
+						option.classList.remove('incorrect');
+					}, 500);
+				}
+			});
+		});
+	</script>
 </body>
 </html>

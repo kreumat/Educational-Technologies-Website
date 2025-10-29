@@ -68,19 +68,15 @@
                 <div class="quiz-question" id="q2" style="display: none;">
                     <h3>What colour is the pencil case?</h3>
                     <div class="quiz-options">
-                        <div class="quiz-option color-swatch" data-correct="true" style="background-color: blue;"></div>
                         <div class="quiz-option color-swatch" data-correct="false" style="background-color: red;"></div>
                         <div class="quiz-option color-swatch" data-correct="false" style="background-color: yellow;"></div>
                         <div class="quiz-option color-swatch" data-correct="false" style="background-color: green;"></div>
+                        <div class="quiz-option color-swatch" data-correct="true" style="background-color: blue;"></div>
                     </div>
                 </div>
                 <div class="quiz-question" id="q3" style="display: none;">
                     <h3>What is *NOT* in the pencil case?</h3>
                     <div class="quiz-options">
-                        <button class="quiz-option" data-correct="true">
-                            <img src="../images/vocabulary/classroomobjects/book.png" alt="Book">
-                            <span>a book</span>
-                        </button>
                         <button class="quiz-option" data-correct="false">
                             <img src="../images/vocabulary/classroomobjects/pencil.png" alt="Pencil">
                             <span>a yellow pencil</span>
@@ -88,6 +84,10 @@
                         <button class="quiz-option" data-correct="false">
                             <img src="../images/vocabulary/classroomobjects/sharpener.png" alt="Sharpener">
                             <span>a red sharpener</span>
+                        </button>
+                        <button class="quiz-option" data-correct="true">
+                            <img src="../images/vocabulary/classroomobjects/book.png" alt="Book">
+                            <span>a book</span>
                         </button>
                         <button class="quiz-option" data-correct="false">
                             <img src="../images/vocabulary/classroomobjects/rubber.png" alt="Rubber">
@@ -107,8 +107,8 @@
                 <div class="quiz-question" id="q5" style="display: none;">
                     <h3>Where is the book?</h3>
                     <div class="quiz-options text-only">
-                        <button class="quiz-option" data-correct="true">on the desk</button>
                         <button class="quiz-option" data-correct="false">in the pencil case</button>
+                        <button class="quiz-option" data-correct="true">on the desk</button>
                         <button class="quiz-option" data-correct="false">on the chair</button>
                     </div>
                 </div>
@@ -118,41 +118,53 @@
             </div>
         </div>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const quizContainer = document.getElementById('reading-quiz-container');
-            const questions = quizContainer.querySelectorAll('.quiz-question');
-            const completionMessage = document.getElementById('completion-message');
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			// --- Navigation Menu Code ---
+			const navToggle = document.querySelector('.nav-toggle');
+			const navUl = document.querySelector('.main-nav ul');
 
-            quizContainer.addEventListener('click', (e) => {
-                const option = e.target.closest('.quiz-option');
-                if (!option) return;
+			if (navToggle && navUl) {
+				navToggle.addEventListener('click', () => {
+					navUl.classList.toggle('active');
+					navToggle.classList.toggle('active');
+				});
+			}
 
-                const isCorrect = option.dataset.correct === 'true';
-                const currentQuestion = option.closest('.quiz-question');
+			// --- Reading Quiz Code ---
+			const quizContainer = document.getElementById('reading-quiz-container');
+			const questions = quizContainer.querySelectorAll('.quiz-question');
+			const completionMessage = document.getElementById('completion-message');
 
-                if (isCorrect) {
-                    option.classList.add('correct');
-                    setTimeout(() => {
-                        const currentQuestionId = parseInt(currentQuestion.id.replace('q', ''));
-                        const nextQuestion = document.getElementById(`q${currentQuestionId + 1}`);
+			quizContainer.addEventListener('click', (e) => {
+				const option = e.target.closest('.quiz-option');
+				if (!option) return;
 
-                        currentQuestion.style.display = 'none';
+				const isCorrect = option.dataset.correct === 'true';
+				const currentQuestion = option.closest('.quiz-question');
 
-                        if (nextQuestion) {
-                            nextQuestion.style.display = 'block';
-                        } else {
-                            completionMessage.style.display = 'block';
-                        }
-                    }, 1000);
-                } else {
-                    option.classList.add('incorrect');
-                    setTimeout(() => {
-                        option.classList.remove('incorrect');
-                    }, 500);
-                }
-            });
-        });
-    </script>
+				if (isCorrect) {
+					option.classList.add('correct');
+					setTimeout(() => {
+						const currentQuestionId = parseInt(currentQuestion.id.replace('q', ''));
+						const nextQuestion = document.getElementById(`q${currentQuestionId + 1}`);
+
+						currentQuestion.style.display = 'none';
+
+						if (nextQuestion) {
+							nextQuestion.style.display = 'block';
+						} else {
+							completionMessage.style.display = 'block';
+						}
+					}, 1000);
+				} else {
+					option.classList.add('incorrect');
+					setTimeout(() => {
+						option.classList.remove('incorrect');
+					}, 500);
+				}
+			});
+		});
+	</script>
 </body>
 </html>
