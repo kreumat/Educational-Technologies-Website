@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listen and Repeat</title>
-    <link rel="icon" href="../../../files/images/other/classroomlifelogo.png">
+    <link rel="icon" href="../../../files/images/other/favicon.png">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -76,8 +76,7 @@
                 { display: 'sharpener', audio: '../../audio/sharpener.wav', accepted: ['sharpener'] },
                 { display: 'eraser', audio: '../../audio/eraser.wav', accepted: ['eraser'] }
             ];
-            // NOT: 'audio' yolunu ('../../audio/') kendi dosya yapınıza göre 
-            // gerekirse düzeltin. Orijinal kodunuzdaki CSS yoluna göre tahmin yürüttüm.
+
 
             let shuffledWords = []; // Artık kelime objelerini tutacak
             let currentWordIndex = 0;
@@ -96,8 +95,6 @@
             const feedbackContainer = document.querySelector('.feedback-container');
             const cardsWrapper = document.querySelector('.cards-wrapper');
 
-            // Sabit 'audio' nesnesini kaldırıyoruz, çünkü her seferinde yeniden oluşturulacak.
-            // const audio = new Audio('../../audio/apple.mp3'); // <-- BU SATIRI SİLDİK
 
             // Speech Recognition setup (Aynı kalabilir)
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
