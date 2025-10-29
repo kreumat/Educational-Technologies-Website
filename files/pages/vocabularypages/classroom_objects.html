@@ -11,9 +11,8 @@
     <div class="activity-container">
         <a href="../vocabulary.html" class="back-link">&larr; Go back to activities</a>
         <h1>Vocabulary Activity: Classroom Objects</h1>
-		<p class="mobileviewdescription">If you are using a tablet or smartphone, instead of dragging, tap to select the pictures and then tap their target location.</p>
+		<p class="mobileviewdescription" style="color: red; text-decoration: underline;" >If you are using a tablet or smartphone, instead of dragging, tap to select the pictures and then tap their target location.</p>
 
-        <!-- Activity 1: Description Matching -->
         <section id="activity1">
             <div class="draggable-items">
                 <h3>Drag the Picture</h3>
@@ -25,27 +24,27 @@
             </div>
         </section>
 
-        <!-- Activity 2 has been removed -->
-    </div>
+        </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // AÇIKLAMA DEĞİŞİKLİKLERİ BURADA
         const itemsData = [
-            { id: 'board', name: 'Board', description: 'The teacher writes on this.' },
-            { id: 'book', name: 'Book', description: 'We read stories from this.' },
-            { id: 'chair', name: 'Chair', description: 'We sit on this in the classroom.' },
-            { id: 'crayon', name: 'Crayon', description: 'We use this to color pictures.' },
-            { id: 'desk', name: 'Desk', description: 'We put our books on this.' },
-            { id: 'notebook', name: 'Notebook', description: 'We write in this with a pencil.' },
-            { id: 'pen', name: 'Pen', description: 'We use this to write with ink.' },
-            { id: 'pencil', name: 'Pencil', description: 'We use this to write and can erase it.' },
-            { id: 'pencilcase', name: 'Pencil Case', description: 'We put our pencils inside this.' },
-            { id: 'rubber', name: 'Rubber', description: 'We use this to erase mistakes.' },
-            { id: 'ruler', name: 'Ruler', description: 'We use this to draw straight lines.' },
-            { id: 'schoolbag', name: 'Schoolbag', description: 'We carry our books in this.' },
-            { id: 'scissors', name: 'Scissors', description: 'We use these to cut paper.' },
-            { id: 'sharpener', name: 'Sharpener', description: 'This makes our pencils sharp.' },
-            { id: 'table', name: 'Table', description: 'A piece of furniture with a flat top and one or more legs.' }
+            { id: 'board', name: 'Board', description: 'Teacher writes on this' },
+            { id: 'book', name: 'Book', description: 'We read this' },
+            { id: 'chair', name: 'Chair', description: 'We sit on this' },
+            { id: 'crayon', name: 'Crayon', description: 'We colour with this' },
+            { id: 'desk', name: 'Desk', description: 'We sit and write on this' },
+            { id: 'notebook', name: 'Notebook', description: 'We write our notes in this' },
+            { id: 'pen', name: 'Pen', description: 'We write with this using ink' },
+            { id: 'pencil', name: 'Pencil', description: 'We write with this' },
+            { id: 'pencilcase', name: 'Pencil Case', description: 'We put our pencils in this' },
+            { id: 'rubber', name: 'Rubber', description: 'We erase with this' },
+            { id: 'ruler', name: 'Ruler', description: 'We draw straight lines with this"' },
+            { id: 'schoolbag', name: 'Schoolbag', description: 'We put our books in this' },
+            { id: 'scissors', name: 'Scissors', description: 'We cut paper with this' },
+            { id: 'sharpener', name: 'Sharpener', description: 'We sharpen our pencils with this' },
+            { id: 'table', name: 'Table', description: 'Teacher puts his books on this' }
         ];
 
         let correctMatches1 = 0;
