@@ -12,6 +12,7 @@
 <body class="listen-repeat-body">
     <div class="activity-container">
         <a href="../pronunciation.html" class="back-link">&larr; Go back to Pronunciation</a>
+		<u>If the system isn't picking up your voice properly, try saying the command twice, like "four-four," instead of just once.</u>
         <div class="cards-wrapper">
             <div class="card listen-card">
                 <h2 id="word-display">Word</h2>
@@ -41,27 +42,26 @@
             // 'words' dizisi yerine, her kelime için bir obje içeren 'wordData' dizisi kullanıyoruz.
             // Bu "pre-set" yapı, her kelime için özel ses dosyası ve kabul edilen cevapları belirler.
             const wordData = [
-                { display: 'zero', audio: '../../audio/zero.wav', accepted: ['zero', '0'] },
-                { display: 'one', audio: '../../audio/one.wav', accepted: ['one', '1'] },
-                { display: 'two', audio: '../../audio/two.wav', accepted: ['two', '2'] },
-                { display: 'three', audio: '../../audio/three.wav', accepted: ['three', '3'] },
-                { display: 'four', audio: '../../audio/four.wav', accepted: ['four', '4'] },
-                { display: 'five', audio: '../../audio/five.wav', accepted: ['five', '5'] },
-                { display: 'six', audio: '../../audio/six.wav', accepted: ['six', '6'] },
-                { display: 'seven', audio: '../../audio/seven.wav', accepted: ['seven', '7'] },
-                { display: 'eight', audio: '../../audio/eight.wav', accepted: ['eight', '8'] },
-                { display: 'nine', audio: '../../audio/nine.wav', accepted: ['nine', '9'] },
-                { display: 'ten', audio: '../../audio/ten.wav', accepted: ['ten', '10'] },
-                { display: 'eleven', audio: '../../audio/eleven.wav', accepted: ['eleven', '11'] },
-                { display: 'twelve', audio: '../../audio/twelve.wav', accepted: ['twelve', '12'] },
-                { display: 'thirteen', audio: '../../audio/thirteen.wav', accepted: ['thirteen', '13'] },
-                { display: 'fourteen', audio: '../../audio/fourteen.wav', accepted: ['fourteen', '14'] },
-                { display: 'fifteen', audio: '../../audio/fifteen.wav', accepted: ['fifteen', '15'] },
-                { display: 'sixteen', audio: '../../audio/sixteen.wav', accepted: ['sixteen', '16'] },
-                { display: 'seventeen', audio: '../../audio/seventeen.wav', accepted: ['seventeen', '17'] },
-                { display: 'eighteen', audio: '../../audio/eighteen.wav', accepted: ['eighteen', '18'] },
-                { display: 'nineteen', audio: '../../audio/nineteen.wav', accepted: ['nineteen', '19'] },
-                { display: 'twenty', audio: '../../audio/twenty.wav', accepted: ['twenty', '20'] },
+                { display: 'zero', audio: '../../audio/zero.wav', accepted: ['zero', '0', '0 0', '00'] },
+                { display: 'one', audio: '../../audio/one.wav', accepted: ['one', '1', '1 1', '11'] },
+                { display: 'two', audio: '../../audio/two.wav', accepted: ['two', '2', '2 2', '22'] },
+                { display: 'three', audio: '../../audio/three.wav', accepted: ['three', '3', '3 3', '33'] },
+                { display: 'four', audio: '../../audio/four.wav', accepted: ['four', '4', '4 4', '44'] },
+                { display: 'five', audio: '../../audio/five.wav', accepted: ['five', '5', '5 5', '55'] },
+                { display: 'seven', audio: '../../audio/seven.wav', accepted: ['seven', '7', '7 7', '77'] },
+                { display: 'eight', audio: '../../audio/eight.wav', accepted: ['eight', '8', '8 8', '88'] },
+                { display: 'nine', audio: '../../audio/nine.wav', accepted: ['nine', '9', '9 9', '99'] },
+                { display: 'ten', audio: '../../audio/ten.wav', accepted: ['ten', '10', '10 10', '1010'] },
+                { display: 'eleven', audio: '../../audio/eleven.wav', accepted: ['eleven', '11', '11 11', '1111'] },
+                { display: 'twelve', audio: '../../audio/twelve.wav', accepted: ['twelve', '12', '12 12', '1212'] },
+                { display: 'thirteen', audio: '../../audio/thirteen.wav', accepted: ['thirteen', '13', '13 13', '1313'] },
+                { display: 'fourteen', audio: '../../audio/fourteen.wav', accepted: ['fourteen', '14', '14 14', '1414'] },
+                { display: 'fifteen', audio: '../../audio/fifteen.wav', accepted: ['fifteen', '15', '15 15', '1515'] },
+                { display: 'sixteen', audio: '../../audio/sixteen.wav', accepted: ['sixteen', '16', '16 16', '1616'] },
+                { display: 'seventeen', audio: '../../audio/seventeen.wav', accepted: ['seventeen', '17', '17 17', '1717'] },
+                { display: 'eighteen', audio: '../../audio/eighteen.wav', accepted: ['eighteen', '18', '18 18', '1818'] },
+                { display: 'nineteen', audio: '../../audio/nineteen.wav', accepted: ['nineteen', '19', '19 19', '1919'] },
+                { display: 'twenty', audio: '../../audio/twenty.wav', accepted: ['twenty', '20', '20 20', '2020'] },
                 // Renkler ve nesneler için sadece 1 kabul edilen cevap yeterli
                 { display: 'white', audio: '../../audio/white.wav', accepted: ['white'] },
                 { display: 'blue', audio: '../../audio/blue.wav', accepted: ['blue'] },
